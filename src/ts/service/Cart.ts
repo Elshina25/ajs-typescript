@@ -10,4 +10,13 @@ export default class Cart {
     get items(): Buyable[] {
         return [...this._items]; 
     }
+
+    sumPrice(values: Buyable[]): number {
+       const priceArray = [...values].map(value => value.price);
+       const sum = priceArray.reduce((acc, value) => {
+            return acc + value;
+       }, 0);
+
+       return sum;
+    }
 }
