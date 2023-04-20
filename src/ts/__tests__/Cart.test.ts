@@ -28,7 +28,7 @@ test('cart total amount', () => {
   const cart = new Cart;
   cart.add(new Movie(20, 'Мстители', 500, 2012, 'США', 'Avengers Assemble!', ['фантастика', 'боевик', 'фэнтези', 'приключения'], '137 мин./ 02:17'));
   cart.add(new Book(15, 'War and Peace', 'Leo Tolstoy', 2000, 960));
-  expect(cart.sumPrice(cart.items)).toEqual(2500);
+  expect(cart.sumPrice()).toEqual(2500);
 });
 
 test ('cart total amount with sale', () => {
