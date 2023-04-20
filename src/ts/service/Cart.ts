@@ -11,12 +11,20 @@ export default class Cart {
         return [...this._items]; 
     }
 
-    sumPrice(values: Buyable[]): number {
-       const priceArray = [...values].map(value => value.price);
-       const sum = priceArray.reduce((acc, value) => {
-            return acc + value;
+    sumPrice(values: any): number {
+      return this.items.reduce((acc, value) => {
+            return acc + value.price;
        }, 0);
-
-       return sum;
     }
+
+    sumPriceWithSale(sale: number): number {
+        const sum = this.items.reduce((acc, value) => {
+            return (acc + value.price);
+       }, 0);
+       return sum - (sum * sale / 100);
+    }
+
+    removeItem(id: number): Buyable[] {
+      return this.items.filter(item => item.id !== id);
+     }
 }

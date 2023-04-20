@@ -24,10 +24,38 @@ test('add movie to Cart', () => {
   expect(cart.items).toEqual(movie);
 });
 
-test('cart total price', () => {
+test('cart total amount', () => {
   const cart = new Cart;
   cart.add(new Movie(20, 'Мстители', 500, 2012, 'США', 'Avengers Assemble!', ['фантастика', 'боевик', 'фэнтези', 'приключения'], '137 мин./ 02:17'));
   cart.add(new Book(15, 'War and Peace', 'Leo Tolstoy', 2000, 960));
   expect(cart.sumPrice(cart.items)).toEqual(2500);
+});
 
+test ('cart total amount with sale', () => {
+  const cart = new Cart;
+  cart.add(new Movie(20, 'Мстители', 500, 2012, 'США', 'Avengers Assemble!', ['фантастика', 'боевик', 'фэнтези', 'приключения'], '137 мин./ 02:17'));
+  cart.add(new Book(15, 'War and Peace', 'Leo Tolstoy', 2000, 960));
+  cart.add(new Book(10, 'Rich dad, poor dad', 'Robert Kiyosaki', 1500, 336));
+  expect(cart.sumPriceWithSale(30)).toEqual(2800);
+})
+
+test('remove item.id from cart', () => {
+  const cart = new Cart;
+  cart.add(new Movie(20, 'Мстители', 500, 2012, 'США', 'Avengers Assemble!', ['фантастика', 'боевик', 'фэнтези', 'приключения'], '137 мин./ 02:17'));
+  cart.add(new Book(15, 'War and Peace', 'Leo Tolstoy', 2000, 960));
+  cart.add(new Book(10, 'Rich dad, poor dad', 'Robert Kiyosaki', 1500, 336));
+  expect(cart.removeItem(20)).toEqual([{
+    id: 15,
+    name: 'War and Peace',
+    author: 'Leo Tolstoy',
+    price: 2000,
+    pages: 960
+  }, 
+  {
+    id: 10,
+    name: 'Rich dad, poor dad',
+    author: 'Robert Kiyosaki',
+    price: 1500,
+    pages: 336
+  }])
 })
